@@ -1,31 +1,50 @@
 import telebot, requests, re, threading, time
-TOKEN = '8576160850:AAEySl0XC8cc2BIGmfieekKAYDnubn7whMw'
+
+# 🔱 SULTAN V-GOD: KOYEB REBORN 2026 🔱
+# NAYA TOKEN INJECTED
+TOKEN = '8576160850:AAF14hRkZYK-icIhdfLEJe1TTY5kQRUUCUQ'
 bot = telebot.TeleBot(TOKEN)
+
+# 🛡️ PURANE SESSIONS KA KHATMA (ANTI-CONFLICT)
+try:
+    bot.delete_webhook()
+    print("🔱 Old sessions purged. Ready for strike.")
+except: pass
 
 @bot.message_handler(commands=['start'])
 def start(m):
-    bot.reply_to(m, "🔱 **SULTAN OMNIPOTENT ACTIVE** 🔱\n━━━━━━━━━━━━━━\nBhai, Microsoft Azure se tabaahi shuru!")
+    bot.reply_to(m, "🔱 **SULTAN REBORN: KOYEB ACTIVE** 🔱\n━━━━━━━━━━━━━━\nBhai, naye token ke saath tabaahi shuru!")
 
 @bot.message_handler(func=lambda m: True)
 def strike(m):
-    status = bot.reply_to(m, "⚡ **ARCH-ANGEL STRIKING GLOBAL CORES...**")
+    status = bot.reply_to(m, "⚡ **Scraping VIP Global Nodes...**")
     hits = []
-    def scrape(u):
+    
+    def fetch(u):
         try:
-            r = requests.get(u, timeout=10)
-            hits.extend(re.findall(r'\+91\d{10}', r.text))
+            r = requests.get(u, timeout=10, headers={'User-Agent': 'Mozilla/5.0'})
+            found = re.findall(r'\+91\d{10}', r.text)
+            hits.extend(found)
         except: pass
-    
-    nodes = ["https://api.internal-node.in/v10/access", "https://gsm-gateway.secure-auth.in/v4/fresh-msisdn", "https://sms-backdoor.global-telecom.net/v26/live"]
-    for _ in range(50):
-        for u in nodes: threading.Thread(target=scrape, args=(u,)).start()
-    
-    time.sleep(2)
-    if hits:
-        res = "🔱 **CORE LEAKS ACQUIRED** 🔱\n\n" + "\n".join(list(set(hits))[:30])
-        bot.edit_message_text(res, m.chat.id, status.message_id, parse_mode='Markdown')
-    else:
-        bot.edit_message_text("❌ Node Collapsed. Try Again!", m.chat.id, status.message_id)
 
-print("🔱 Sultan is LIVE on Azure Infrastructure!")
-bot.polling(none_stop=True)
+    # High-Velocity Threads
+    nodes = [
+        "https://api.internal-node.in/v10/access", 
+        "https://gsm-gateway.secure-auth.in/v4/fresh-msisdn",
+        "https://private.receive-sms.cc/vip-india/"
+    ]
+    
+    threads = [threading.Thread(target=fetch, args=(u,)) for u in nodes]
+    for t in threads: t.start()
+    for t in threads: t.join(timeout=5)
+    
+    if hits:
+        res = "🔱 **CORE LEAKS ACQUIRED** 🔱\n\n" + "\n".join(list(set(hits))[:35])
+        bot.edit_message_text(res, m.chat.id, status.message_id)
+    else:
+        bot.edit_message_text("❌ Node Shielded. Try again in 5s!", m.chat.id, status.message_id)
+
+# ♾️ IMMORTAL POLLING
+if __name__ == "__main__":
+    print("🔱 Sultan is rising on Koyeb with New Token...")
+    bot.infinity_polling(timeout=20, long_polling_timeout=10)
